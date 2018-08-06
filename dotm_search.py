@@ -5,3 +5,5 @@ within the 'word/document.xml' section of a MSWord .dotm file.
 """
 
 # Your awesome code begins here!
+def dotm_search.py (text, directory):
+    
