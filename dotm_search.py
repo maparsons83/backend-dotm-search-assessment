@@ -7,27 +7,27 @@ import os
 import sys
 import zipfile
 
-# Your awesome code begins here!
 def dotm_search(text, dir):
     print "Searching directory {} for text {} ...".format(dir, text)
     filenames = os.listdir(dir)
     matches = 0
     searches = 0
     for filename in filenames:
-        if filename.endswith('.dotm'):
+        if filename.endswith(".dotm"):
             searches += 1
             try:
-                zip_file = zipfile.ZipFile(os.path.abspath(os.path.join)(dir, filename), 'r')
-                data = zip_file.read('word/document.xml')
+                zip_ref = zipfile.ZipFile(os.path.abspath(os.path.join(dir, filename)), "r")
+                data = zip_ref.read("word/document.xml")
                 if data.find(text) != -1:
-                    print 'Match found in file: {}'.format(os.path.join(dir, filename))
-                    index = data.find(text)
-                    print '...{}...\n'.format(data[(index - 40):(index + 41)])
+                    print "Match found in file: {}".format(os.path.join(dir, filename))
+                    matches += 1
+                    position = data.find(text)
+                    print "...{}...\n".format(data[(position - 40):(position + 41)])
             except:
                 print "Problem with file: %s" % filename
                 print "Total dotm files searched: {}".format(searches)
                 print "Total dotm files matched: {}".format(matches)
-
+      
 if __name__ == '__main__':
     cwd = os.getcwd()
     if len(sys.argv) == 2:
@@ -36,6 +36,6 @@ if __name__ == '__main__':
         dotm_search(sys.argv[1], sys.argv[3])
     else:
         print 'usage: dotm_search.py <text> --dir "./dotm_files"'
-        sys.exit(1)  
+        sys.exit(1)    
 
 
